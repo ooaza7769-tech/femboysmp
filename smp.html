@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FemboySMP.pl | ANARCHIA</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&family=Noto+Sans+JP:wght@900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #ffb7c5;
+            --dark-pink: #ff85a2;
+            --soft-purple: #2d1b2e;
+            --glass: rgba(255, 255, 255, 0.08);
+            --text-muted: #d1d1d1;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(180deg, #120812 0%, #050505 100%);
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-x: hidden;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 80px 20px 40px 20px;
+            z-index: 10;
+        }
+
+        .hero h1 {
+            font-family: 'Noto Sans JP', sans-serif;
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            margin: 0;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 10px;
+            text-shadow: 0 0 30px rgba(255, 183, 197, 0.6);
+        }
+
+        /* Sakura Particles */
+        .sakura {
+            position: absolute;
+            background: linear-gradient(135deg, #ffb7c5, #ff85a2);
+            border-radius: 100% 0 100% 0;
+            opacity: 0.6;
+            pointer-events: none;
+            animation: fall linear infinite;
+            z-index: 2;
+        }
+
+        @keyframes fall {
+            0% { transform: translateY(-10vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.7; }
+            100% { transform: translateY(110vh) translateX(100px) rotate(720deg); opacity: 0; }
+        }
+
+        /* Układ rang obok siebie */
+        .container {
+            display: flex;
+            flex-wrap: nowrap;
+            justify-content: center;
+            gap: 15px;
+            padding: 20px;
+            max-width: 1400px;
+            width: 98%;
+            z-index: 10;
+            overflow-x: auto;
+        }
+
+        .rank-card {
+            background: var(--glass);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 183, 197, 0.15);
+            border-radius: 20px;
+            padding: 30px 15px;
+            text-align: center;
+            transition: 0.3s ease;
+            flex: 1;
+            min-width: 180px;
+            max-width: 250px;
+        }
+
+        .rank-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary);
+            box-shadow: 0 10px 30px rgba(255, 183, 197, 0.2);
+            background: rgba(255, 183, 197, 0.05);
+        }
+
+        .rank-icon { font-size: 50px; margin-bottom: 10px; display: block; }
+        .rank-name { font-size: 1.6rem; font-weight: 800; margin-bottom: 5px; text-transform: uppercase; }
+        .price { font-size: 1.3rem; font-weight: 300; margin-bottom: 20px; display: block; color: var(--primary); }
+
+        .buy-btn {
+            background: linear-gradient(45deg, var(--primary), var(--dark-pink));
+            color: var(--soft-purple);
+            border: none;
+            padding: 10px 0;
+            border-radius: 50px;
+            font-weight: 800;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: 0.3s;
+            width: 100%;
+            letter-spacing: 1px;
+        }
+
+        .buy-btn:hover { filter: brightness(1.1); transform: scale(1.05); }
+
+        /* Obszerny Regulamin */
+        .rules-wrapper {
+            width: 90%;
+            max-width: 1100px;
+            margin: 60px 0 100px 0;
+            background: rgba(0, 0, 0, 0.6);
+            border-top: 4px solid var(--primary);
+            border-radius: 15px;
+            padding: 50px;
+            z-index: 10;
+            backdrop-filter: blur(15px);
+        }
+
+        .rules-scroll {
+            height: 600px;
+            overflow-y: auto;
+            padding-right: 25px;
+            font-size: 0.9rem;
+            line-height: 1.8;
+            color: #ccc;
+            text-align: justify;
+        }
+
+        .rules-section { margin-bottom: 30px; }
+        .rules-section h3 { color: var(--primary); font-size: 1.2rem; margin-bottom: 10px; border-bottom: 1px solid rgba(255, 183, 197, 0.2); padding-bottom: 5px; }
+        
+        .rules-scroll::-webkit-scrollbar { width: 4px; }
+        .rules-scroll::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 10px; }
+
+        @media (max-width: 1000px) {
+            .container { flex-wrap: wrap; }
+            .rank-card { min-width: 250px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="hero">
+        <h1>FemboySMP.pl</h1>
+        <div style="color: var(--primary); font-weight: 600; letter-spacing: 5px; margin-top: 10px;">ANARCHIA • BEZ ZASAD</div>
+    </header>
+
+    <div class="container">
+        <div class="rank-card">
+            <span class="rank-icon">🫙</span>
+            <div class="rank-name" style="color: #fff;">Gooner</div>
+            <span class="price">5 PLN</span>
+            <button class="buy-btn" onclick="pay('gooner')">Kup</button>
+        </div>
+        <div class="rank-card">
+            <span class="rank-icon">🦊</span>
+            <div class="rank-name" style="color: #fbc531;">Furas</div>
+            <span class="price">10 PLN</span>
+            <button class="buy-btn" onclick="pay('furas')">Kup</button>
+        </div>
+        <div class="rank-card">
+            <span class="rank-icon">🖤</span>
+            <div class="rank-name" style="color: #a29bfe;">Gotka</div>
+            <span class="price">20 PLN</span>
+            <button class="buy-btn" onclick="pay('gotka')">Kup</button>
+        </div>
+        <div class="rank-card">
+            <span class="rank-icon">🔫</span>
+            <div class="rank-name" style="color: #487eb0;">Kirk</div>
+            <span class="price">30 PLN</span>
+            <button class="buy-btn" onclick="pay('kirk')">Kup</button>
+        </div>
+        <div class="rank-card">
+            <span class="rank-icon">🏝️</span>
+            <div class="rank-name" style="color: #e84118;">Epstein</div>
+            <span class="price">50 PLN</span>
+            <button class="buy-btn" onclick="pay('epstein')">Kup</button>
+        </div>
+    </div>
+
+    <div class="rules-wrapper">
+        <h2 style="text-align:center; color: var(--primary); font-size: 2.5rem; margin-top:0;">REGULAMIN I WARUNKI KORZYSTANIA</h2>
+        <div class="rules-scroll">
+            
+            <div class="rules-section">
+                <h3>§1. Postanowienia Wstępne</h3>
+                1.1. Niniejszy regulamin określa zasady korzystania ze sklepu internetowego serwera FemboySMP.pl.<br>
+                1.2. Serwer FemboySMP.pl działa na zasadach "Anarchii", co oznacza świadomą rezygnację administracji z moderowania rozgrywki między graczami.<br>
+                1.3. Korzystanie ze sklepu jest dobrowolne i oznacza pełną akceptację warunków niniejszego regulaminu.
+            </div>
+
+            <div class="rules-section">
+                <h3>§2. Charakter Usług</h3>
+                2.1. Przedmiotem transakcji są wirtualne przedmioty lub rangi (usługi cyfrowe), które nie mają wartości rzeczywistej poza serwerem gry.<br>
+                2.2. Usługi są przypisywane do Unikalnej Nazwy Użytkownika (Nicku) podanego podczas transakcji w panelu Stripe.<br>
+                2.3. Aktywacja usług następuje po otrzymaniu potwierdzenia od operatora płatności Stripe.
+            </div>
+
+            <div class="rules-section">
+                <h3>§3. Zasady Płatności Stripe</h3>
+                3.1. Operatorem płatności jest system Stripe, zapewniający bezpieczne transakcje.<br>
+                3.2. Sklep nie przechowuje żadnych danych dotyczących kart płatniczych ani danych wrażliwych użytkowników.
+            </div>
+
+            <div class="rules-section">
+                <h3>§4. Polityka Zwrotów (Refundacje)</h3>
+                4.1. Prawo do odstąpienia od umowy nie przysługuje w przypadku dostarczania treści cyfrowych, które nie są zapisane na nośniku materialnym.<br>
+                4.2. Klikając przycisk "Kup" i finalizując transakcję, użytkownik wyraża zgodę na natychmiastowe dostarczenie usługi i przyjmuje do wiadomości utratę prawa do zwrotu.<br>
+                4.3. Wszelkie próby Chargebacku skutkują permanentnym banem IP.
+            </div>
+
+            <div class="rules-section">
+                <h3>§5. Odpowiedzialność na Anarchii</h3>
+                5.1. Zakup rangi nie gwarantuje ochrony przed mechanikami Anarchii (griefing, kradzież).<br>
+                5.2. Administracja nie zwraca przedmiotów utraconych w wyniku walki lub błędów gry.
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        function pay(rank) {
+            const stripeLinks = {
+                'gooner': 'https://buy.stripe.com/00w00ifRV4hT6uJd184AU0J',
+                'furas': 'https://buy.stripe.com/4gMfZggVZ29L2et0em4AU0K',
+                'gotka': 'https://buy.stripe.com/3cI28qfRV6q1cT7e5c4AU0L',
+                'kirk': 'https://buy.stripe.com/7sY28q0X14hT3ixaT04AU0M',
+                'epstein': 'https://buy.stripe.com/7sY8wO6hl29Lf1f9OW4AU0N'
+            };
+
+            const link = stripeLinks[rank];
+            if (link) {
+                window.location.href = link;
+            }
+        }
+
+        function createSakura() {
+            const sakura = document.createElement('div');
+            sakura.classList.add('sakura');
+            sakura.style.left = Math.random() * 100 + 'vw';
+            const size = Math.random() * 10 + 6 + 'px';
+            sakura.style.width = size;
+            sakura.style.height = size;
+            sakura.style.animationDuration = Math.random() * 3 + 4 + 's';
+            document.body.appendChild(sakura);
+            setTimeout(() => sakura.remove(), 7000);
+        }
+        setInterval(createSakura, 300);
+    </script>
+</body>
+</html>
